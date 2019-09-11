@@ -6,7 +6,7 @@ function getData(cb) {
 
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            cbJSON.parse(this.responseText);
+            cb(JSON.parse(this.responseText));
         }
     };
 }
