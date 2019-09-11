@@ -11,6 +11,8 @@ function getData(cb) {
     };
 }
 
-getData(function() {
+function printDataToConsole(data) {
     console.log(data);
-});
+}
+
+getData(printDataToConsole);
