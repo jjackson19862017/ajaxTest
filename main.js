@@ -13,11 +13,15 @@ function getData(type, cb) {
     };
 }
 
-/*function printDataToConsole(data) {
-    console.log(data);
-}
+function getTableHeaders(obj) {
+    var tableHeaders = [];
 
-getData(printDataToConsole);*/
+    Object.keys(obj).forEach(function(key) {
+        tableHeaders.push(`<td>${key}</td>`);
+    });
+
+    return `<tr>${tableHeaders}</td>`;
+}
 
 function writeToDocument(type) {
     var el = document.getElementById("data");
@@ -25,10 +29,15 @@ function writeToDocument(type) {
     getData(type, function(data) {
         console.dir(data);
         data = data.results
+        var tableHeaders = getTableHeaders(data[0]);
 
         data.forEach(function(item) {
-            el.innerHTML += "<p>" + item.name + "</p>";
-        });
+            Object.keys(item).forEach(function(key) {
+                console.log(key);
+            })
 
+            // el.innerHTML += "<p>" + item.name + "</p>";
+        });
+        el.innerHTML = `<table>${tableHeaders}</table>`;
     });
 }
