@@ -24,20 +24,23 @@ function getTableHeaders(obj) {
 }
 
 function writeToDocument(type) {
+    var tableRows = [];
     var el = document.getElementById("data");
     el.innerHTML = "";
+
     getData(type, function(data) {
-        console.dir(data);
         data = data.results
         var tableHeaders = getTableHeaders(data[0]);
 
         data.forEach(function(item) {
+            var dataRow = [];
             Object.keys(item).forEach(function(key) {
-                console.log(key);
-            })
+                dataRow.push(`<td>{$item[key]}</td>`);
+            });
+            tableRows.push(dataRow);
+        })
 
-            // el.innerHTML += "<p>" + item.name + "</p>";
-        });
-        el.innerHTML = `<table>${tableHeaders}</table>`;
+        // el.innerHTML += "<p>" + item.name + "</p>";
     });
-}
+    el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`;
+});
