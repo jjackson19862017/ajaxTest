@@ -20,7 +20,15 @@ function getData(type, cb) {
 getData(printDataToConsole);*/
 
 function writeToDocument(type) {
+    var el = document.getElementById("data");
+    el.innerHTML = "";
     getData(type, function(data) {
-        document.getElementById("data").innerHTML = data;
+        console.dir(data);
+        data = data.results
+
+        data.forEach(function(item) {
+            el.innerHTML += "<p>" + item.name + "</p>";
+        });
+
     });
 }
