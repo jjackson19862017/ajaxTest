@@ -1,7 +1,9 @@
-function getData(cb) {
+const baseURL = "https://swapi.co/api/";
+
+function getData(type, cb) {
     var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", "https://swapi.co/api/");
+    xhr.open("GET", baseURL + type + "/");
     xhr.send();
 
     xhr.onreadystatechange = function() {
@@ -11,8 +13,14 @@ function getData(cb) {
     };
 }
 
-function printDataToConsole(data) {
+/*function printDataToConsole(data) {
     console.log(data);
 }
 
-getData(printDataToConsole);
+getData(printDataToConsole);*/
+
+function writeToDocument(type) {
+    getData(type, function(data) {
+        document.getElementById("data").innerHTML = data;
+    });
+}
